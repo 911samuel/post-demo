@@ -1,6 +1,5 @@
-package com.sam.postsdemo.presentation.posts
+package com.sam.postsdemo.ui.posts
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,16 +9,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.sam.postsdemo.data.Post
+import com.sam.postsdemo.domain.model.Post
 
 @Composable
 fun PostItem(
-    post: Post
-){
-    Card(modifier = Modifier.fillMaxSize()) {
+    post: Post,
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier.fillMaxWidth()) {
         AsyncImage(
             model = post.imageUrl,
             contentDescription = null,
@@ -31,20 +30,13 @@ fun PostItem(
         Text(
             text = post.title,
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)
+        )
+        Text(
+            text = post.newsSite,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 4.dp)
         )
     }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PostItemPreview() {
-    PostItem(
-        Post(
-            id = 1,
-            title = "State hoisting: why your composables should be stateless",
-            imageUrl = "https://picsum.photos/id/1020/600/400"
-        )
-    )
 }
